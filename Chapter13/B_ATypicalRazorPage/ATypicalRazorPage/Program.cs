@@ -14,4 +14,5 @@ app.MapRazorPages();
 // But as that page does not exist, redirect to a page that does!
 // You can also try /category/Long 
 app.Map("/", () => Results.Redirect("/category/Simple"));
+
 app.Run();

@@ -22,7 +22,9 @@ builder.Services.Configure<RouteOptions>(options =>
 var app = builder.Build();
 
 app.UseStaticFiles();
+
 app.UseRouting();
+
 app.UseAuthorization();
 
 app.MapRazorPages();
@@ -33,6 +35,8 @@ public class PrefixingPageRouteModelConvention : IPageRouteModelConvention
 {
     public void Apply(PageRouteModel model)
     {
+        //Reference: https://www.learnrazorpages.com/advanced/custom-route-conventions
+
         var selectors = model.Selectors
             .Select(x => new SelectorModel
             {
@@ -45,7 +49,7 @@ public class PrefixingPageRouteModelConvention : IPageRouteModelConvention
             })
             .ToList();
 
-        foreach(var newSelector in selectors)
+        foreach (var newSelector in selectors)
         {
             model.Selectors.Add(newSelector);
         }
@@ -76,7 +80,7 @@ partial class KebabCaseParameterTransformer : IOutboundParameterTransformer
             return null;
         }
 
-        return MyRegex().Replace(value.ToString(), "$1-$2").ToLower();
+        return MyRegex().Replace(value.ToString()!, "$1-$2").ToLower();
     }
 
     [GeneratedRegex("([a-z])([A-Z])")]

@@ -5,23 +5,27 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace RoutingExamples.Pages.ProductDetails;
 
+//Route template: ProductDetails/{productName}
 public class IndexModel : PageModel
 {
     private readonly ProductService _service;
+
     public IndexModel(ProductService service)
     {
         _service = service;
     }
 
     public Product Selected { get; set; }
-
-    public IActionResult OnGet(string name)
+  
+    public IActionResult OnGet(string productName)
     {
-        Selected = _service.GetProduct(name);
+        Selected = _service.GetProduct(productName);
+
         if (Selected is null)
         {
             return NotFound();
         }
+
         return Page();
     }
 

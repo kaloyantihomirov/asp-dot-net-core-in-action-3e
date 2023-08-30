@@ -1,4 +1,5 @@
 ﻿namespace ATypicalRazorPage;
+
 public record ToDoListModel(string Category, string Title);
 
 public class ToDoService
